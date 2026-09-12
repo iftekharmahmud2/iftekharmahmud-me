@@ -42,7 +42,7 @@ export default function Hero({ onOpenHireModal }: HeroProps) {
             
             {/* Hi I am */}
             <span className="text-zinc-400 font-normal text-base sm:text-lg mb-1 tracking-normal">
-              Hi I am
+              Hi, I am
             </span>
 
             {/* Name */}
@@ -143,7 +143,7 @@ export default function Hero({ onOpenHireModal }: HeroProps) {
               {/* 2. Bottom-Clipped Person (Clipped inside the circle at the bottom) */}
               <div className="absolute inset-0 rounded-full overflow-hidden flex items-end justify-center z-10 pointer-events-none">
                 <Image
-                  src="/iftekhar.png"
+                  src="/hero.png"
                   alt="Iftekhar Mahmud"
                   width={600}
                   height={800}

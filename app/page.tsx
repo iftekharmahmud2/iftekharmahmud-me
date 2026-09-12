@@ -1,69 +1,72 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import About from "@/components/About";
+import Portfolio, { Project } from "@/components/Portfolio";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import HireMeModal from "@/components/HireMeModal";
+import ProjectModal from "@/components/ProjectModal";
 
 export default function Home() {
+  const [isHireModalOpen, setIsHireModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState("");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const handleOpenHireModal = (serviceName?: string, planName?: string) => {
+    setSelectedService(serviceName || "");
+    setSelectedPlan(planName || "");
+    setIsHireModalOpen(true);
+  };
+
+  const handleSelectServiceFromCard = (serviceTitle: string) => {
+    setSelectedService(serviceTitle);
+    setIsHireModalOpen(true);
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="min-h-screen bg-[#111113] text-[#f4f4f5] relative selection:bg-[#fd6f00] selection:text-white">
+      {/* 1. Header Navigation (Exact LOGO + text links + solid orange Hire Me) */}
+      <Navbar onOpenHireModal={() => handleOpenHireModal()} />
+
+      {/* 2. Hero Section (Exact 1:1 match with reference screenshot + Iftekhar Mahmud + iftekhar.PNG + WUB CSE Context) */}
+      <Hero onOpenHireModal={() => handleOpenHireModal()} />
+
+      {/* 3. Services / Academic & Technical Capabilities */}
+      <Services onSelectService={handleSelectServiceFromCard} />
+
+      {/* 4. About Me (World University of Bangladesh CSE Department, Coursework & Skills) */}
+      <About />
+
+      {/* 5. Featured Projects & Technical Work */}
+      <Portfolio onSelectProject={(project) => setSelectedProject(project)} />
+
+      {/* 6. Contact & All 10 Social Media Profiles */}
+      <Contact
+        initialService={selectedService}
+        initialPlan={selectedPlan}
+      />
+
+      {/* 7. Footer */}
+      <Footer />
+
+      {/* Interactive Modals */}
+      <HireMeModal
+        isOpen={isHireModalOpen}
+        onClose={() => setIsHireModalOpen(false)}
+        preselectedService={selectedService}
+        preselectedPlan={selectedPlan}
+      />
+
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+        onOpenHireModal={() => handleOpenHireModal(selectedProject?.title)}
+      />
+    </main>
   );
 }
