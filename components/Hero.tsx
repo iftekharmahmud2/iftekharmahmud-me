@@ -155,7 +155,7 @@ export default function Hero({ onOpenHireModal }: HeroProps) {
               {/* 3. Top-Popping Head & Hair (Pops out above the circle with breathing room below navbar) */}
               <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none [clip-path:polygon(-30%_-40%,130%_-40%,130%_50%,-30%_50%)]">
                 <Image
-                  src="/iftekhar.png"
+                  src="/hero.png"
                   alt="Iftekhar Mahmud"
                   width={600}
                   height={800}
