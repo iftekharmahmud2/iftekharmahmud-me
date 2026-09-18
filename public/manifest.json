@@ -1,0 +1,21 @@
+{
+  "name": "Iftekhar Mahmud Portfolio",
+  "short_name": "Iftekhar Mahmud",
+  "description": "Portfolio of Iftekhar Mahmud, Computer Science & Engineering (CSE) Student at World University of Bangladesh",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111113",
+  "theme_color": "#fd6f00",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48 32x32 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
